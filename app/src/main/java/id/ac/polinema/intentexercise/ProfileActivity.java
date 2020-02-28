@@ -2,7 +2,9 @@ package id.ac.polinema.intentexercise;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -11,6 +13,7 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView emailText;
     private TextView homepageText;
     private TextView aboutText;
+    private ImageView profileImage;
 
 
     @Override
@@ -18,6 +21,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        profileImage = findViewById(R.id.image_profile);
         fullnameText = findViewById(R.id.text_fullname);
         emailText = findViewById(R.id.text_email);
         homepageText = findViewById(R.id.text_homepage);
@@ -25,15 +29,15 @@ public class ProfileActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            String a = extras.getString(RegisterActivity.ABOUT_KEY);
-            String fullname = extras.getString(RegisterActivity.FULLNAME_KEY);
-            String  email = extras.getString(RegisterActivity.EMAIL_KEY);
-            String  homepage = extras.getString(RegisterActivity.HOMEPAGE_KEY);
+            Bundle extra = getIntent().getExtras();
+            Bitmap bitmap = extra.getParcelable("ProfileImage");
 
-            aboutText.setText(a);
-            fullnameText.setText(fullname);
-            emailText.setText(email);
-            homepageText.setText(homepage);
+
+            profileImage.setImageBitmap(bitmap);
+            aboutText.setText(extras.getString("about"));
+            fullnameText.setText(extras.getString("fullname"));
+            emailText.setText(extras.getString("email"));
+            homepageText.setText(extras.getString("homepage"));
             // TODO: display value here
         }
     }
