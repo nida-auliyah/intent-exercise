@@ -22,22 +22,27 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         profileImage = findViewById(R.id.image_profile);
-        fullnameText = findViewById(R.id.text_fullname);
-        emailText = findViewById(R.id.text_email);
-        homepageText = findViewById(R.id.text_homepage);
-        aboutText = findViewById(R.id.text_about);
+        fullnameText = findViewById(R.id.label_fullname);
+        emailText = findViewById(R.id.label_email);
+        homepageText = findViewById(R.id.label_homepage);
+        aboutText = findViewById(R.id.label_about);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             Bundle extra = getIntent().getExtras();
-            Bitmap bitmap = extra.getParcelable("ProfileImage");
+            Bitmap bmp = extra.getParcelable("ProfileImage");
+
+            String a = extras.getString(RegisterActivity.ABOUT_KEY);
+            String fullname = extras.getString(RegisterActivity.FULLNAME_KEY);
+            String  email = extras.getString(RegisterActivity.EMAIL_KEY);
+            String  homepage = extras.getString(RegisterActivity.HOMEPAGE_KEY);
 
 
-            profileImage.setImageBitmap(bitmap);
-            aboutText.setText(extras.getString("about"));
-            fullnameText.setText(extras.getString("fullname"));
-            emailText.setText(extras.getString("email"));
-            homepageText.setText(extras.getString("homepage"));
+            profileImage.setImageBitmap(bmp);
+            aboutText.setText(a);
+            fullnameText.setText(fullname);
+            emailText.setText(email);
+            homepageText.setText(homepage);
             // TODO: display value here
         }
     }

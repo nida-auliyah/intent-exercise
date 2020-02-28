@@ -17,17 +17,16 @@ import android.widget.Toast;
 
 import java.io.IOException;
 public class RegisterActivity extends AppCompatActivity {
-
+    private static final String TAG = RegisterActivity.class.getCanonicalName();
     public static final String FULLNAME_KEY = "fullname";
     public static final String EMAIL_KEY = "email";
     public static final String PASSWORD_KEY = "password";
     public static final String CONFIRMPASSWORD_KEY = "confirmpassword";
-    public static final String HOMEPAGE_KEY ="homepage";
-    public static final String ABOUT_KEY ="about";
-    public static final String IMAGE_KEY ="ProfileImage";
+    public static final String HOMEPAGE_KEY = "homepage";
+    public static final String ABOUT_KEY = "about";
+    public static final String IMAGE_KEY = "ProfileImage";
 
     private static final int GALLERY_REQUEST_CODE = 1;
-    private static final String TAG = RegisterActivity.class.getCanonicalName();
     private EditText fullnameInput;
     private EditText emailInput;
     private EditText passwordInput;
@@ -51,7 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
         imageprofile = findViewById(R.id.image_profile);
     }
 
-    public void handleSubmit(View view) {
+    public void handleRegister(View view) {
 
         String fullname = fullnameInput.getText().toString();
         String email = emailInput.getText().toString();
@@ -64,19 +63,19 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Data Harus diisi!",Toast.LENGTH_SHORT).show();
 
         }else {
-            Intent intent = new Intent(this, ProfileActivity.class);
+            Intent intent1 = new Intent(this, ProfileActivity.class);
             imageprofile.buildDrawingCache();
             Bitmap bit = imageprofile.getDrawingCache();
             Bundle extra =new Bundle();
             extra.putParcelable(IMAGE_KEY,bit);
-            intent.putExtra(FULLNAME_KEY, fullname);
-            intent.putExtra(EMAIL_KEY, email);
-            intent.putExtras(extra);
-            intent.putExtra(PASSWORD_KEY, pass);
-            intent.putExtra(CONFIRMPASSWORD_KEY, conf);
-            intent.putExtra(HOMEPAGE_KEY, homepage);
-            intent.putExtra(ABOUT_KEY, about);
-            startActivity(intent);
+            intent1.putExtra(FULLNAME_KEY, fullname);
+            intent1.putExtra(EMAIL_KEY, email);
+            intent1.putExtras(extra);
+            intent1.putExtra(PASSWORD_KEY, pass);
+            intent1.putExtra(CONFIRMPASSWORD_KEY, conf);
+            intent1.putExtra(HOMEPAGE_KEY, homepage);
+            intent1.putExtra(ABOUT_KEY, about);
+            startActivity(intent1);
         }
     }
 
