@@ -2,8 +2,12 @@ package id.ac.polinema.intentexercise;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,7 +19,6 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView aboutText;
     private ImageView profileImage;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +29,7 @@ public class ProfileActivity extends AppCompatActivity {
         emailText = findViewById(R.id.label_email);
         homepageText = findViewById(R.id.label_homepage);
         aboutText = findViewById(R.id.label_about);
+
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -44,6 +48,18 @@ public class ProfileActivity extends AppCompatActivity {
             emailText.setText(email);
             homepageText.setText(homepage);
             // TODO: display value here
+        }
+    }
+
+    public void handlevisit(View view) {
+        String url = homepageText.getText().toString();
+
+        if (!url.equals("https://")){
+            url = "http://" + url;
+        }
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
         }
     }
 }
